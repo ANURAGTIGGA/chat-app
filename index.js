@@ -21,8 +21,11 @@ io.on('connection', (socket) => {
 
     socket.on('chat_msg', (msg)=>{
         console.log('message: ' + msg);
-        io.emit('chat_msg', msg);
-        //socket.broadcast.emit('chat_msg', msg);
+        //broadcast to all
+        //io.emit('chat_msg', msg);
+
+        //broadcast to all except the sender
+        socket.broadcast.emit('chat_msg', msg);
     })
 
     socket.on('disconnect', ()=>{
